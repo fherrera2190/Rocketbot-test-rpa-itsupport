@@ -1,13 +1,10 @@
 # Prueba Técnica Fernando Herrera
-
-import xlwings as xw
 import tkinter as tk
 from tkinter import filedialog
 from selenium import webdriver
 from handleEmail import send_email
-
-
-
+from handleExcel import obtenerDatos
+from help import filtrarDatos
 
 #funcion para obtener el nombre del archivo de excel
 my_dir=None
@@ -30,40 +27,14 @@ window.mainloop()
 
 #Funcion para obtener array de datos
 print(my_dir)
-def obtenerDatos():
-    wb=xw.Book(my_dir)
-    sheet = wb.sheets(1)
-    rango_datos = sheet.range("A1").expand()
-    num_filas = rango_datos.rows.count
-    num_columnas = rango_datos.columns.count
+registrosExcel = obtenerDatos(my_dir)
 
-    registrosExcel = []
+atrasados = filtrarDatos(registrosExcel,"Atrasado",9)
+regularizados = filtrarDatos(registrosExcel,"Regularizado",9)
 
-    for i in range(2, num_filas + 1):
-        fila = []
-        for j in range(1, num_columnas + 1):
-            valor_celda = sheet.range((i, j)).value
-            if valor_celda is not None:
-                fila.append(valor_celda)
-        if fila:
-                registrosExcel.append(fila)
-    wb.close()
-    return registrosExcel
+try:
+    send_email(atrasados)
+except Exception as e:
+    print("Hubo un error",e)
 
-registrosExcel = obtenerDatos()
-
-def filtrarDatos(string,pos):
-    array=[]     
-    for i in registrosExcel:
-        if i[pos] == string:
-             array.append(i)
-    
-    return array
-
-atrasados = filtrarDatos("Atrasado",9)
-regularizados = filtrarDatos("Regularizado",9)
-# print(len(atrasados))
-# print(len(regularizados))
-
-send_email(atrasados)
-
+print("HOLAAAAAAAAAAAAAAAAAAAAAAAAAAAAA")
