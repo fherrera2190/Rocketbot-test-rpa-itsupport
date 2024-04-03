@@ -1,10 +1,10 @@
 # Prueba Técnica Fernando Herrera
 import tkinter as tk
 from tkinter import filedialog
-from selenium import webdriver
 from handleEmail import send_email
 from handleExcel import obtenerDatos
 from help import filtrarDatos
+from handleForm import sendForm
 
 #funcion para obtener el nombre del archivo de excel
 my_dir=None
@@ -37,4 +37,10 @@ try:
 except Exception as e:
     print("Hubo un error",e)
 
-print("HOLAAAAAAAAAAAAAAAAAAAAAAAAAAAAA")
+try:
+    sendForm(regularizados)
+except Exception as e:
+    print("Hubo un error",e)
+
+
+
