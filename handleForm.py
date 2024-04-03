@@ -28,8 +28,8 @@ def sendForm(array):
         driver.find_element(By.XPATH,'//*[@id="obs"]').send_keys(i[1])
         time.sleep(3)
         driver.find_element(By.XPATH,'//*[@id="submit"]').click()
+        print(driver.find_element(By.XPATH,' //*[@id="form"]/div/div[1]/div[1]/h5').text)
 
 
 
     driver.quit()
- 

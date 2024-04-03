@@ -1,5 +1,6 @@
 # Prueba Técnica Fernando Herrera
 import tkinter as tk
+import os
 from tkinter import filedialog
 from handleEmail import send_email
 from handleExcel import obtenerDatos
@@ -33,12 +34,17 @@ atrasados = filtrarDatos(registrosExcel,"Atrasado",9)
 regularizados = filtrarDatos(registrosExcel,"Regularizado",9)
 
 try:
+    print("INICIO Envio emails")
     send_email(atrasados)
 except Exception as e:
+    #Hay un email (Eladio.Piña_yyy1234@Hotmail.com) que hace saltar una excepcion por que tiene un ñ, no pude solucionarlo, pero lo guardo como reto personal
     print("Hubo un error",e)
 
 try:
+    os.system('cls')
+    print("INICIO Formulario")
     sendForm(regularizados)
+    print("FIN PROGRAMA")
 except Exception as e:
     print("Hubo un error",e)
 
