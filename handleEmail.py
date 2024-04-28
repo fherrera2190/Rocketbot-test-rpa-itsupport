@@ -2,8 +2,8 @@ import smtplib
 from email.mime.text import MIMEText
 from smtplib import SMTPRecipientsRefused
 #Config. server smtp
-sender ="ferbeoulvedev@gmail.com"
-password="dhgj lxue zjfg tvjj"
+sender =""
+password=""
 coding="utf-8"
 def send_email(array):
      smtp_server= smtplib.SMTP_SSL('smtp.gmail.com',465)
